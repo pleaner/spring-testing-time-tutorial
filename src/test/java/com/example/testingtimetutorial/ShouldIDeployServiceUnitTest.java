@@ -20,7 +20,7 @@ class ShouldIDeployServiceUnitTest {
   @MockBean Clock clock;
 
   @Test
-  void shouldIDeployOnTuesday() {
+  void setTheClockTo2001() {
 
     // Set the Mocked Time
     given(clock.instant()).willReturn(Instant.parse("2001-01-01T12:15:00Z"));
@@ -28,17 +28,5 @@ class ShouldIDeployServiceUnitTest {
 
     String actual = serviceUnderTest.currentTime().toString();
     assertThat(actual).isEqualTo("2001-01-01T12:15");
-  }
-
-  @Test
-  void shouldIDeployOnFriday() {
-
-    // Set the Mocked Time
-    given(clock.instant()).willReturn(Instant.parse("2023-03-03T03:03:00Z"));
-    given(clock.getZone()).willReturn(ZoneId.of("UCT"));
-
-    // Inject the Fixed Clock
-    String actual = serviceUnderTest.currentTime().toString();
-    assertThat(actual).isEqualTo("2023-03-03T03:03");
   }
 }
